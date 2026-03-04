@@ -3,128 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda Sublimados | Estilo Japonés</title>
-<style>
-    /* Paleta: arena, blanco, azul petróleo suave */
-    :root {
-        --color-bg: #f8f4ef; /* arena */
-        --color-primary: #05445e; /* azul petróleo */
-        --color-secondary: #ffffff; /* blanco */
-        --color-accent: #90e0ef; /* azul suave */
-        --color-text: #333;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
-    body { background: var(--color-bg); color: var(--color-text); }
-
-    /* Header */
-    header { background: var(--color-primary); color: var(--color-secondary); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-    header h1 { font-size: 1.8rem; letter-spacing: 1px; }
-    nav a { color: var(--color-secondary); margin-left: 1.5rem; text-decoration: none; font-weight: 500; transition: 0.3s; }
-    nav a:hover { color: var(--color-accent); }
-
-    /* Container */
-    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
-
-    /* Productos */
-    .product { background: var(--color-secondary); padding: 1rem 2rem; margin: 1rem 0; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
-    .product h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--color-primary); }
-    .product p { font-weight: bold; color: var(--color-primary); }
-    .product button { background: var(--color-primary); color: var(--color-secondary); border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-    .product button:hover { background: var(--color-accent); color: var(--color-primary); }
-
-    /* Carrito */
-    .cart-button { background: var(--color-accent); color: var(--color-primary); border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-    .cart-button:hover { background: var(--color-primary); color: var(--color-secondary); }
-
-    .cart { position: fixed; top: 70px; right: 20px; background: var(--color-secondary); width: 300px; max-height: 80vh; overflow-y: auto; padding: 1rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 999; }
-    .cart h3 { margin-bottom: 1rem; color: var(--color-primary); text-align: center; }
-    .cart ul { list-style: none; padding: 0; margin-bottom: 1rem; }
-    .cart ul li { margin-bottom: 0.5rem; display: flex; justify-content: space-between; font-weight: 500; }
-    .cart-total { font-weight: bold; font-size: 1.1rem; text-align: right; color: var(--color-primary); }
-
-</style>
+<title>Tienda Sublimados | Inicio</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
     <h1>Tienda Sublimados</h1>
     <nav>
-        <a href="#tienda">Tienda</a>
-        <button class="cart-button" onclick="toggleCart()">Carrito 🛒</button>
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="tienda.html">Tienda</a>
     </nav>
 </header>
 
-<div class="container" id="tienda">
-    <h2 style="margin-bottom: 1rem; color: var(--color-primary);">Nuestros Kits</h2>
-
-    <div class="product">
-        <div>
-            <h3>Kit 10 Poleras + 10 Gorros</h3>
-            <p>$150.000</p>
-        </div>
-        <button onclick="addToCart('Kit 10 Poleras + 10 Gorros', 150000)">Añadir al carrito</button>
-    </div>
-
-    <div class="product">
-        <div>
-            <h3>Kit 20 Poleras + 20 Gorros</h3>
-            <p>$250.000</p>
-        </div>
-        <button onclick="addToCart('Kit 20 Poleras + 20 Gorros', 250000)">Añadir al carrito</button>
-    </div>
-
-    <div class="product">
-        <div>
-            <h3>Kit 50 Poleras + 20 Gorros</h3>
-            <p>$400.000</p>
-        </div>
-        <button onclick="addToCart('Kit 50 Poleras + 20 Gorros', 400000)">Añadir al carrito</button>
-    </div>
+<div class="container">
+    <section id="presentacion">
+        <img src="img/gente-sublimando.jpg" alt="Gente sublimando" style="width:100%; border-radius:12px; margin-bottom:2rem;">
+        <h2>Bienvenido a Tienda Sublimados</h2>
+        <p style="font-size:1.1rem; line-height:1.5; max-width:700px;">Aquí encontrarás los mejores kits de poleras y gorros sublimados, con calidad premium y diseños únicos para tu negocio o tus proyectos creativos.</p>
+    </section>
 </div>
-
-<div class="cart" id="carrito">
-    <h3>Carrito de Compras</h3>
-    <ul id="cart-items"></ul>
-    <p class="cart-total">Total: $<span id="cart-total">0</span></p>
-</div>
-
-<script>
-let cart = [];
-
-function addToCart(name, price) {
-    cart.push({ name, price });
-    renderCart();
-    if (!document.getElementById('carrito').style.display || document.getElementById('carrito').style.display === 'none') {
-        toggleCart();
-    }
-}
-
-function renderCart() {
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    cartItems.innerHTML = '';
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        total += item.price;
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - $${item.price.toLocaleString()}`;
-        cartItems.appendChild(li);
-    });
-
-    cartTotal.textContent = total.toLocaleString();
-}
-
-function toggleCart() {
-    const cartEl = document.getElementById('carrito');
-    if (cartEl.style.display === 'flex') {
-        cartEl.style.display = 'none';
-    } else {
-        cartEl.style.display = 'flex';
-    }
-}
-</script>
 
 </body>
 </html>
