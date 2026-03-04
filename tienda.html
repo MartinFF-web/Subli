@@ -6,6 +6,25 @@
 <title>Tienda Sublimados | Tienda</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Ajuste para botón checkout dentro del carrito */
+.checkout-button {
+    background: #05445e;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 0.5rem;
+}
+
+.checkout-button:hover {
+    background: #033649;
+}
+</style>
 </head>
 <body>
 
@@ -23,7 +42,6 @@
 <div class="container">
     <h2 style="margin-bottom: 1rem; color: var(--color-primary);">Nuestros Kits Sublimados</h2>
 
-    <!-- Productos -->
     <div class="product">
         <div>
             <h3>Kit 10 Poleras + 10 Gorros</h3>
@@ -47,7 +65,6 @@
         </div>
         <button onclick="addToCart('Kit 50 Poleras + 20 Gorros', 400000)">Añadir al carrito</button>
     </div>
-
 </div>
 
 <!-- Carrito desplegable -->
@@ -55,9 +72,24 @@
     <h3>Carrito de Compras</h3>
     <ul id="cart-items"></ul>
     <p class="cart-total">Total: $<span id="cart-total">0</span></p>
+    <button class="checkout-button" onclick="checkout()">Checkout</button>
 </div>
 
 <script src="script.js"></script>
+<script>
+// Función de checkout
+function checkout() {
+    if(cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+    let total = cart.reduce((sum, item) => sum + item.price, 0);
+    alert(`Gracias por tu compra. Total a pagar: $${total.toLocaleString()}`);
+    cart = []; // vaciar carrito después de checkout
+    renderCart();
+    toggleCart(); // cerrar carrito
+}
+</script>
 
 </body>
 </html>
